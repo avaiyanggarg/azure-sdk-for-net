@@ -14,16 +14,16 @@ namespace Azure.Identity.Tests
     public class ManagedIdentityCredentialWebAppTests : IdentityRecordedTestBase
     {
         private HttpPipeline _pipeline;
-        private readonly Uri _testEndpoint;
+        private Uri _testEndpoint;
 
         public ManagedIdentityCredentialWebAppTests(bool isAsync) : base(isAsync)
         {
-            _testEndpoint = new Uri($"https://{TestEnvironment.IdentityTestWebName}.azurewebsites.net/test");
         }
 
         [SetUp]
         public void Setup() {
             var options = new TokenCredentialOptions();
+            _testEndpoint = new Uri($"https://{TestEnvironment.IdentityTestWebName}.azurewebsites.net/test");
             _pipeline = HttpPipelineBuilder.Build(InstrumentClientOptions(options), Array.Empty<HttpPipelinePolicy>(), Array.Empty<HttpPipelinePolicy>(), new ResponseClassifier());
         }
 
